@@ -6,7 +6,8 @@ let inline private collectGarbage() =
     System.GC.Collect()
 
 /// Stops the runtime for a given function
-let stopTime f = 
+let stopTime f =
+    f()
     collectGarbage()
     let sw = new System.Diagnostics.Stopwatch()
     sw.Start()
@@ -16,7 +17,8 @@ let stopTime f =
     result,float sw.ElapsedMilliseconds
 
 /// Stops the average runtime for a given function and applies it the given count
-let stopAverageTime count f = 
+let stopAverageTime count f =
+    f()
     collectGarbage()
     let sw = new System.Diagnostics.Stopwatch()
     let list = [1..count]
